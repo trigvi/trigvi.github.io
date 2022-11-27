@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SVG Image Generator</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            font-size: 10pt;
+            letter-spacing: 0.5pt;
+            line-height: 2em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-smoothing: antialiased;
+        }
+
+        @media screen and (min-width: 768px) {
+            html {
+                font-size: 11pt;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            html {
+                font-size: 12pt;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+
+        button {
+            margin: 0 0.1rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1pt;
+            border: 0;
+            border-radius: 0.33rem;
+            cursor: pointer;
+            background: transparent;
+            color: #333;
+        }
+
+            button.toggled {
+                background: #333;
+                color: #eee;
+            }
+
+        .hidden-xs {
+            display: none;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .hidden-xs {
+                display: block;
+            }
+
+        }
+
+
+
+        noscript {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: grid;
+            align-content: center;
+            justify-content: center;
+            text-align: center;
+            width: 100vw;
+            height: 100vh;
+            padding: 20vh 20vw;
+            font-size: 1.5rem;
+            background: #ddd;
+            color: #666;
+        }
+
+        .yesscript {
+            display: none;
+        }
+
+
+
+        .yesscript > div {
+            padding: 3vh 10vw;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .yesscript > div {
+                padding: 5vh 10vw;
+            }
+
+        }
+
+
+
+        .yesscript > div.intro {
+            width: 90vw;
+            margin: 0 auto;
+            padding: 10vh 15vw;
+            color: #666;
+            text-align: left;
+            font-size: 1.2rem;
+            border-bottom: 5px solid #f9f9f9;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .yesscript > div.intro {
+                width: 80vw;
+                padding: 15vh 30vw 15vh 10vw;
+                font-size: 1rem;
+            }
+
+        }
+
+        /*.yesscript > div.intro {
+            padding: 10vh 15vw;
+            background: #f3f3f3;
+            color: #888;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .yesscript > div.intro {
+                padding: 10vh 25vw;
+                font-size: 1rem;
+            }
+
+        }*/
+
+
+
+        .yesscript > div.menu {
+            padding-top: 5vh;
+            padding-right: 15vw;
+            text-align: right;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .yesscript > div.menu {
+                padding-top: 10vh;
+                padding-right: 20vw;
+            }
+
+        }
+
+
+
+        .yesscript > div.footer {
+            width: 90vw;
+            margin: 5vh auto 0 auto;
+            padding: 10vh 15vw;
+            color: #666;
+            text-align: center;
+            font-size: 1.2rem;
+            border-top: 5px solid #f9f9f9;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .yesscript > div.footer {
+                width: 80vw;
+                font-size: 1rem;
+            }
+
+        }
+
+        /*.yesscript > div.footer {
+            margin-top: 5vh;
+            padding: 10vh 15vw;
+            background: #f9f9f9;
+            color: #999;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .yesscript > div.footer {
+                margin-top: 10vh;
+                font-size: 1rem;
+            }
+
+        }*/
+
+
+
+        .container {
+            position: relative;
+            margin: 0 auto;
+        }
+
+            .container .buttons {
+                position: absolute;
+                top: 5vw;
+                left: 5vw;
+                display: block;
+            }
+
+                .container.mode-dark .buttons button {
+                    background: #333;
+                    color: #eee;
+                    /*background: rgba(255, 255, 255, 0.95);
+                    color: black;*/
+                }
+
+                .container.mode-light .buttons button {
+                    background: #333;
+                    color: #eee;
+                }
+
+        #container-portrait {
+            width: 70vw;
+            min-height: 140vw;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .container .buttons {
+                top: 3vw;
+                left: 3vw;
+            }
+
+            #container-landscape {
+                display: block;
+                width: 66vw;
+                min-height: 37vw;
+            }
+
+            #container-portrait {
+                width: 33vw;
+                min-height: 59vw;
+            }
+
+        }
+
+        @media screen and (max-aspect-ratio: 1/1) {
+
+            #container-landscape-outer {
+                display: none;
+            }
+
+        }
+
+        @media screen and (min-aspect-ratio: 1/1) {
+
+            #container-portrait-outer {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <noscript>
+        To view this page you must enable Javascript.
+    </noscript>
+
+    <div class="yesscript">
+
+        <!-- <div class="intro">
+            On this page you can generate unlimited random background images
+            which you can then download for free by clicking &darr; buttons.
+        </div> -->
+
+        <div class="menu">
+            <button onclick="setMode('light')" id="menu-button-light">Light</button>
+            <button onclick="setMode('dark')" id="menu-button-dark">Dark</button>
+        </div>
+
+        <div id="container-landscape-outer">
+            <div class="container" id="container-landscape">
+                <div class="buttons">
+                    <button onclick="generateImage('landscape')">Generate</button>
+                    <button onclick="downloadImageSvg('landscape')">&darr;SVG</button>
+                    <!-- <button onclick="downloadImagePng('landscape')">&darr;PNG</button> -->
+                </div>
+            </div>
+        </div>
+
+        <div id="container-portrait-outer">
+            <div class="container" id="container-portrait">
+                <div class="buttons">
+                    <button onclick="generateImage('portrait')">Generate</button>
+                    <button onclick="downloadImageSvg('portrait')">&darr;SVG</button>
+                    <!-- <button onclick="downloadImagePng('portrait')">&darr;PNG</button> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Hope you enjoyed it!
+        </div>
+
+    </div>
+
+    <script>
+
+        var mode = '';
+        var svgContentsLandscape = '';
+        var svgContentsPortrait = '';
+
+        function setMode(value) {
+
+            // Set mode globally
+            mode = value;
+
+            // Set mode css classes (first remove any existing mode- class)
+            var containers = document.querySelectorAll('.container');
+            for (var idx=0; idx<containers.length; idx++) {
+                var container = containers[idx];
+                container.classList.remove('mode-dark');
+                container.classList.remove('mode-light');
+                container.classList.add(`mode-${value}`);
+            }
+
+            var menuButtons = document.querySelectorAll('.menu button');
+            for (var idx=0; idx<menuButtons.length; idx++) {
+                var menuButton = menuButtons[idx];
+                menuButton.classList.remove('toggled');
+                if (menuButton.id === 'menu-button-light' && mode === 'light') {
+                    menuButton.classList.add('toggled');
+                } else if (menuButton.id === 'menu-button-dark' && mode === 'dark') {
+                    menuButton.classList.add('toggled');
+                }
+            }
+
+            // Auto-generate new images
+            generateImage('landscape');
+            generateImage('portrait');
+
+        }
+
+        function generateImage(orientation='landscape') {
+
+            // Generate new image
+            var svg = document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' );
+            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            // svg.setAttribute('version', '1.1');
+
+            var svgWidth = 7680;
+            var svgHeight = 4320;
+            if (orientation === 'portrait') {
+                var svgWidth = 4320;
+                var svgHeight = 7680;
+            }
+            svg.setAttribute('viewBox', '0 0 ' + svgWidth.toString() + ' ' + svgHeight.toString());
+            svg.setAttribute('width', svgWidth);
+            svg.setAttribute('height', svgHeight);
+            var singleShapeMaxDimension = svgHeight;
+            if (svgHeight > svgWidth) {
+                singleShapeMaxDimension = svgWidth;
+            }
+
+            var backgroundRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            backgroundRect.setAttribute('width', svgWidth);
+            backgroundRect.setAttribute('height', svgHeight);
+            backgroundRect.setAttribute('style', 'fill: ' + generateRandomRgbColorString());
+            svg.appendChild(backgroundRect);
+
+            // var shape = 'circle';
+            var shape;
+            var randomShapeDecider = Math.random() * 100;
+            if (randomShapeDecider < 50) {
+                shape = 'circle';
+            } else {
+                shape = 'rect';
+            }
+
+            for (var idx=1; idx<=20; idx++) {
+
+                var fillColor = '';
+                var fillOpacity = 0;
+                if (mode === 'dark') {
+                    var fillColor = 'black';
+                    var fillOpacity = 0.1 * Math.random();
+                } else if (mode === 'light') {
+                    var fillColor = 'black';
+                    var fillOpacity = 0.05 * Math.random();
+                }
+
+                if (shape === 'rect') {
+                    var rectWidth = Math.random() * (singleShapeMaxDimension/1.5);
+                    var rectHeight = Math.random()* rectWidth;
+                    var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    rect.setAttribute('width', parseInt(rectWidth));
+                    rect.setAttribute('height', parseInt(rectHeight));
+                    rect.setAttribute('x', parseInt(svgWidth * Math.random()));
+                    rect.setAttribute('y', parseInt(svgHeight * Math.random()));
+                    rect.setAttribute('style', 'fill: ' + fillColor + '; opacity: ' + fillOpacity);
+                    svg.appendChild(rect);
+
+                } else if (shape === 'circle') {
+                    var circleWidth = Math.random() * (singleShapeMaxDimension/1.5);
+                    var circleRadius = circleWidth / 2;
+                    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('r', parseInt(circleRadius));
+                    circle.setAttribute('cx', parseInt(svgWidth * Math.random()));
+                    circle.setAttribute('cy', parseInt(svgHeight * Math.random()));
+                    circle.setAttribute('style', 'fill: ' + fillColor + '; opacity: ' + fillOpacity);
+                    svg.appendChild(circle);
+                }
+            }
+
+            var svgContents = '';
+            if (orientation === 'landscape') {
+                svgContentsLandscape = svg.outerHTML;
+                svgContents = svgContentsLandscape;
+            } else if (orientation === 'portrait') {
+                svgContentsPortrait = svg.outerHTML;
+                svgContents = svgContentsPortrait;
+            }
+
+            var container = document.getElementById(`container-${orientation}`);
+            var svgAsUrl = 'data:image/svg+xml;utf8,' + svgContents;
+            container.style.background = "no-repeat black url('" + svgAsUrl + "')";
+            container.style.backgroundSize = "cover";
+        }
+
+        function generateRandomString(length) {
+
+            var result = '';
+            var characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+            var charactersLength = characters.length;
+            for (var idx=0; idx<length; idx++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+
+        }
+
+        function downloadImageSvg(orientation='landscape') {
+
+            var svgContents = '';
+            if (orientation === 'landscape') {
+                svgContents = svgContentsLandscape;
+            } else if (orientation === 'portrait') {
+                svgContents = svgContentsPortrait;
+            }
+
+            if (!svgContents) {
+                return;
+            }
+
+            var filename = generateRandomString(10) + '.svg';
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(svgContents));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            element.remove();
+
+        }
+
+        // // TODO: the following squishes the image
+        // function downloadImagePng(orientation) {
+
+        //     // https://takuti.me/note/javascript-save-svg-as-image/
+
+        //     // Read svg contents based on orientation
+        //     var svgContents = '';
+        //     if (orientation === 'landscape') {
+        //         svgContents = svgContentsLandscape;
+        //     } else if (orientation === 'portrait') {
+        //         svgContents = svgContentsPortrait;
+        //     }
+
+        //     // Create svg DOM element from string
+        //     var svgWrapper = document.createElement('div');
+        //     svgWrapper.innerHTML = svgContents;
+        //     document.body.appendChild(svgWrapper);
+        //     var svg = svgWrapper.firstChild;
+
+        //     // Convert svg to blob
+        //     var data = (new XMLSerializer()).serializeToString(svg);
+        //     var svgBlob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
+
+        //     // Convert blob to url
+        //     var url = URL.createObjectURL(svgBlob);
+
+        //     // Load blob to image object
+        //     var img = new Image();
+        //     img.addEventListener('load', () => {
+
+        //         // Draw image on canvas
+        //         var bbox = svg.getBBox();
+        //         var canvas = document.createElement('canvas');
+        //         canvas.width = bbox.width;
+        //         canvas.height = bbox.height;
+
+        //         var context = canvas.getContext('2d');
+        //         context.drawImage(img, 0, 0, bbox.width, bbox.height);
+        //         URL.revokeObjectURL(url);
+        //         svgWrapper.remove();
+
+        //         // Trigger download from temporary anchor which we then delete
+        //         var a = document.createElement('a');
+        //         a.download = generateRandomString(10) + '.png';
+        //         document.body.appendChild(a);
+        //         a.href = canvas.toDataURL();
+        //         a.click();
+        //         a.remove();
+        //     });
+        //     img.src = url;
+        // }
+
+        function generateRandomRgbColorString() {
+
+
+            // Generate random HSL color
+            // https://stackoverflow.com/a/43195379
+            var h, s, l;
+            if (mode === 'light') {
+                h = 360 * Math.random();
+                s = (20 + 70 * Math.random());
+                l = (85 + 10 * Math.random());
+            } else if (mode === 'dark') {
+                h = 360 * Math.random();
+                s = (25 + 20 * Math.random());
+                l = 45;
+            }
+            // } else if (mode === 'dark') {
+            //     h = 360 * Math.random();
+            //     s = (10 + 20 * Math.random());
+            //     l = 25;
+            // }
+
+            // Convert to RGB then stringify for CSS
+            var rgb = HSLToRGB(h, s, l);
+            return 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
+
+        }
+
+        function HSLToRGB(h, s, l) {
+
+            // https://css-tricks.com/converting-color-spaces-in-javascript/
+            s /= 100;
+            l /= 100;
+
+            var c = (1 - Math.abs(2 * l - 1)) * s;
+            var x = c * (1 - Math.abs((h / 60) % 2 - 1));
+            var m = l - c/2;
+            var r = 0;
+            var g = 0;
+            var b = 0;
+
+            if (0 <= h && h < 60) {
+                r = c; g = x; b = 0;
+            } else if (60 <= h && h < 120) {
+                r = x; g = c; b = 0;
+            } else if (120 <= h && h < 180) {
+                r = 0; g = c; b = x;
+            } else if (180 <= h && h < 240) {
+                r = 0; g = x; b = c;
+            } else if (240 <= h && h < 300) {
+                r = x; g = 0; b = c;
+            } else if (300 <= h && h < 360) {
+                r = c; g = 0; b = x;
+            }
+            r = Math.round((r + m) * 255);
+            g = Math.round((g + m) * 255);
+            b = Math.round((b + m) * 255);
+
+            return [r, g, b];
+
+        }
+
+        function RGBToHex(r, g, b) {
+
+            // https://css-tricks.com/converting-color-spaces-in-javascript/
+            var r = r.toString(16);
+            var g = g.toString(16);
+            var b = b.toString(16);
+
+            if (r.length == 1) {
+                r = '0' + r;
+            }
+            if (g.length == 1) {
+                g = '0' + g;
+            }
+            if (b.length == 1) {
+                b = '0' + b;
+            }
+
+            return '#' + r + g + b;
+
+        }
+
+        // Actual execution starts here
+        document.querySelectorAll('.yesscript')[0].style.display = 'block';
+        setMode('dark');
+
+    </script>
+
+</body>
+</html>
+
