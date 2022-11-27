@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Corriere Alba/Bra - Feed</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            color: inherit;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        ::-moz-selection {
+            color: inherit;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            color: #666;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            font-size: 10pt;
+            letter-spacing: 0.5pt;
+            line-height: 2em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-smoothing: antialiased;
+        }
+
+        @media screen and (min-width: 768px) {
+            html {
+                font-size: 11pt;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            html {
+                font-size: 12pt;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 10vh 10vw;
+            background: #f3f3f3;
+        }
+
+        .page-title {
+            margin: 0 0 5vh 0;
+            font-size: 1.2rem;
+            color: rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
+        }
+
+        .articles {
+
+        }
+
+            .article {
+                margin-bottom: 3rem;
+            }
+
+                .article-date {
+                    font-size: 0.8rem;
+                    opacity: 0.5;
+                }
+
+                .article-title {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 1.2rem;
+                }
+
+                .article-title a,
+                .article-title a:link,
+                .article-title a:hover,
+                .article-title a:visited {
+                    color: inherit;
+                    text-decoration: none;
+                    border-bottom: 3px solid rgba(0, 0, 0, 0.075);
+                }
+
+        @media screen and (min-width: 768px) {
+
+            body {
+                padding: 10vh 50vw 10vh 10vw;
+            }
+
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <header>
+        <h1 class="page-title">Corriere Alba/Bra - Feed</h1>
+    </header>
+
+    <div class="articles">
+        Loading...
+        <!-- this gets auto-filled by Javascript -->
+    </div>
+
+    <script>
+
+        fetch('https://corsp.dog67.com/https://ilcorriere.net/feed/')
+            .then(response => response.text())
+            .then(str => new window.DOMParser().parseFromString(str, 'text/xml'))
+            .then(data => {
+                console.log(data);
+                let articlesHtml = ``;
+                for (const item of data.querySelectorAll('item')) {
+                    const link = item.querySelector('link').innerHTML;
+                    const title = item.querySelector('title').innerHTML;
+                    const pubDate = new Date(item.querySelector('pubDate').innerHTML);
+                    const dateFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+                    articlesHtml += `
+                        <article class="article">
+                            <div class="article-date">${pubDate.toLocaleDateString('it-IT', dateFormatOptions)}</div>
+                            <h2 class="article-title"><a href="${link}" target="_blank">${title}</a></h2>
+                        </article>
+                        `;
+                }
+                document.querySelectorAll('.articles')[0].innerHTML = articlesHtml;
+            });
+
+    </script>
+
+</body>
+</html>
+

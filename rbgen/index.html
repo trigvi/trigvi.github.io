@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Background Image Generator</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        ::selection {
+            color: inherit;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        ::-moz-selection {
+            color: inherit;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            font-weight: 400;
+            font-size: 10pt;
+            letter-spacing: 0.5pt;
+            line-height: 2em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-smoothing: antialiased;
+        }
+
+        @media screen and (min-width: 768px) {
+            html {
+                font-size: 11pt;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            html {
+                font-size: 12pt;
+            }
+        }
+
+        @media screen and (min-width: 1600px) {
+            html {
+                font-size: 14pt;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+
+        a, a:link, a:hover, a:visited {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @media screen and (max-width: 767px) {
+            .hidden-xs {
+                display: none !important;
+            }
+        }
+
+        noscript {
+            height: 95vh;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10vw;
+            text-align: left;
+            font-size: 1.6rem;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        main {
+            display: none;
+        }
+
+        .javascript-enabled main {
+            display: block;
+        }
+
+
+
+        .hero {
+            height: 95vh;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10vw;
+        }
+
+            .hero-title {
+                text-align: left;
+                font-size: 2.2rem;
+                font-weight: bold;
+                line-height: 1.3;
+                color: rgba(0, 0, 0, 0.8);
+                margin-bottom: 1rem;
+            }
+
+            .hero-dark .hero-title {
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+            .hero-blurb {
+                font-size: 1.2rem;
+                color: rgba(0, 0, 0, 0.6);
+            }
+
+            .hero-dark .hero-blurb {
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+            .hero a,
+            .hero a:link,
+            .hero a:visited {
+                display: inline-block;
+                border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            }
+
+            .hero a:hover {
+                border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+            }
+
+        @media screen and (min-width: 1200px) {
+
+            .hero {
+                padding: 0 30vw 0 10vw;
+            }
+
+                .hero-blurb {
+                    padding-right: 5vw;
+                    font-size: 1.1rem;
+                }
+        }
+
+
+
+        .dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 0px 30px 0px rgba(0,0,0,1);
+            font-size: 1rem;
+        }
+
+            .dialog-inner {
+                margin: 5vh 5vw;
+                min-height: 90vh;
+                background-color: rgba(255, 255, 255, 1);
+            }
+
+                .dialog-bar {
+                    padding: 1rem 2rem;
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    text-align: right;
+                }
+
+                .dialog-contents {
+                    padding: 2rem 2rem;
+                    font-size: 0.9rem;
+                    line-height: 1.6em;
+                }
+
+                    .dialog-contents .css-instructions {
+                        width: 100%;
+                        height: 20vh;
+                        padding: 0.5rem;
+                        margin-top: 1rem;
+                    }
+
+                    .dialog-contents .title {
+                        margin-top: 1.5rem;
+                        font-weight: bold;
+                        font-size: 1.2rem;
+                        padding-bottom: 0.66rem;
+                    }
+
+        @media screen and (min-width: 768px) {
+
+            .dialog {
+
+            }
+
+                .dialog-inner {
+                    margin: 5vh 30vw;
+                }
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+    <noscript>
+        <div>
+            To view this page you must enable Javascript.
+        </div>
+    </noscript>
+
+    <main>
+        <div class="hero rbgen"
+            data-rbgen-width="3840"
+            data-rbgen-height="2160"
+            data-rbgen-tone="pastel"
+            data-rbgen-shapes="circles"
+            data-rbgen-shapes-count="10"
+            data-rbgen-shapes-color-hex="#000000"
+            data-rbgen-shapes-max-opacity="0.05"
+        >
+            <div>
+                <h1 class="hero-title">
+                    The background image underneath this text has been generated
+                    randomly.
+                </h1>
+                <div class="hero-blurb">
+                    You can <a href="#" onclick="regenerateImage(); event.preventDefault();">generate</a> a new image,
+
+                    <a href="#" onclick="lockBackgroundColor('.hero.rbgen'); event.preventDefault();" class="link-to-lock">lock</a>
+                    <a href="#" onclick="unlockBackgroundColor('.hero.rbgen'); event.preventDefault();" class="link-to-unlock" style="display: none">LOCK</a>
+                    the background color,
+                    <a href="#" onclick="showDialog(); event.preventDefault();">get the CSS</a> to use the current image on your website
+
+                    or get the customisable
+                    <a href="https://github.com/trigvi/rbgen">Javascript plugin</a>.
+                </div>
+            </div>
+        </div>
+
+        <div class="dialog">
+            <div class="dialog-inner">
+                <div class="dialog-bar">
+                    <a href="#" onclick="hideDialog(); event.preventDefault();">CLOSE</a>
+                </div>
+                <div class="dialog-contents">
+                    <h2 class="title">GENERATED CSS CODE</h2>
+                    <div>Use the following CSS rules to apply the current background image to an element of your HTML page:</div>
+                    <textarea class="css-instructions"></textarea>
+                    <h2 class="title">DOWNLOAD SVG FILE</h2>
+                    <button onclick="downloadImage(); event.preventDefault();">Download</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- <script src="Rbgen.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/trigvi/rbgen/rbgen-minified.js"></script>
+    <script>
+
+        document.querySelector('body').classList.add('javascript-enabled');
+        let rbgen = new Rbgen();
+        const elLinkToLock = document.querySelector('.link-to-lock');
+        const elLinkToUnlock = document.querySelector('.link-to-unlock');
+        let isBackgroundColorLocked = false;
+
+        function lockBackgroundColor(querySelector) {
+            let elRbgen = document.querySelector(querySelector);
+            if (elRbgen) {
+                let currentBackgroundColorHex = elRbgen.getAttribute('data-rbgen-current-bgcolor-hex');
+                elRbgen.setAttribute('data-rbgen-bgcolor-hex', currentBackgroundColorHex);
+                if (elLinkToLock) {
+                    elLinkToLock.style.display = 'none';
+                }
+
+                if (elLinkToUnlock) {
+                    elLinkToUnlock.style.display = 'inline-block'; // background color now locked: show link to unlock
+                }
+                isBackgroundColorLocked = true;
+            }
+        }
+
+        function unlockBackgroundColor(querySelector) {
+            let elRbgen = document.querySelector(querySelector);
+            if (elRbgen) {
+                elRbgen.setAttribute('data-rbgen-bgcolor-hex', '');
+                if (elLinkToLock) {
+                    elLinkToLock.style.display = 'inline-block'; // background color now unlock: show link to lock
+                }
+
+                if (elLinkToUnlock) {
+                    elLinkToUnlock.style.display = 'none';
+                }
+                isBackgroundColorLocked = false;
+            }
+        }
+
+        function showDialog() {
+            let elDialog = document.querySelector('.dialog');
+            if (elDialog) {
+                elDialog.style.display = 'block';
+            }
+        }
+
+        function hideDialog() {
+            let elDialog = document.querySelector('.dialog');
+            if (elDialog) {
+                elDialog.style.display = 'none';
+            }
+        }
+
+        function plugKeyboardEvents() {
+            window.addEventListener('keyup', function(event) {
+                event.preventDefault();
+                if (event.keyCode === 27) {
+                    hideDialog();
+                }
+            });
+        }
+
+        function regenerateImage() {
+            rbgen.apply(function () {
+                let elRbgen = document.querySelector('.hero.rbgen');
+                if (elRbgen) {
+                    let css = 'background: ' + elRbgen.style.background + ';';
+                    let elCssInstructions = document.querySelector('.css-instructions');
+                    if (elCssInstructions) {
+                        elCssInstructions.innerHTML = css;
+                    }
+                }
+            });
+        }
+
+        function downloadImage() {
+            rbgen.downloadImage('.hero.rbgen');
+        }
+
+        plugKeyboardEvents();
+        regenerateImage();
+    </script>
+
+</body>
+</html>
+
