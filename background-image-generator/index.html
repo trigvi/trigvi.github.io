@@ -9,11 +9,21 @@
             box-sizing: border-box;
         }
 
+        ::selection {
+            color: inherit;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        ::-moz-selection {
+            color: inherit;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
         html {
             height: 100%;
             margin: 0;
             padding: 0;
-            color: #333;
+            color: #666;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
             font-size: 10pt;
             letter-spacing: 0.5pt;
@@ -41,21 +51,29 @@
             background: white;
         }
 
+        a,
+        a:link,
+        a:hover,
+        a:visited {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
         button {
             margin: 0 0.1rem;
             padding: 0.5rem 1rem;
-            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1pt;
             border: 0;
             border-radius: 0.33rem;
             cursor: pointer;
             background: transparent;
-            color: #333;
+            color: #555;
         }
 
             button.toggled {
-                background: #333;
+                background: #555;
                 color: #eee;
             }
 
@@ -89,182 +107,164 @@
             color: #666;
         }
 
-        .yesscript {
+        .main {
             display: none;
         }
 
 
 
-        .yesscript > div {
-            padding: 3vh 10vw;
+        .hero {
+            padding: 20vh 10vw;
+            color: #777;
+            text-align: center;
+            font-size: 1.3rem;
+            line-height: 2.4rem;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         }
 
         @media screen and (min-width: 768px) {
 
-            .yesscript > div {
-                padding: 5vh 10vw;
+            .hero {
+                padding: 30vh 20vw;
+                font-size: 2rem;
+                line-height: 3.2rem;
+                letter-spacing: 1px;
             }
 
         }
 
 
 
-        .yesscript > div.intro {
-            width: 90vw;
-            margin: 0 auto;
-            padding: 10vh 15vw;
-            color: #666;
-            text-align: left;
-            font-size: 1.2rem;
-            border-bottom: 5px solid #f9f9f9;
-        }
-
-        @media screen and (min-width: 768px) {
-
-            .yesscript > div.intro {
-                width: 80vw;
-                padding: 15vh 30vw 15vh 10vw;
-                font-size: 1rem;
-            }
-
-        }
-
-        /*.yesscript > div.intro {
-            padding: 10vh 15vw;
+        .settings-outer {
+            padding: 6rem 15vw;
             background: #f3f3f3;
-            color: #888;
-            text-align: center;
-            font-size: 1.2rem;
+            text-align: left;
+            font-size: 1.1rem;
         }
 
-        @media screen and (min-width: 768px) {
-
-            .yesscript > div.intro {
-                padding: 10vh 25vw;
-                font-size: 1rem;
+            .settings-item {
+                margin-bottom: 2rem;
             }
 
-        }*/
-
-
-
-        .yesscript > div.menu {
-            padding-top: 5vh;
-            padding-right: 15vw;
-            text-align: right;
-        }
-
-        @media screen and (min-width: 768px) {
-
-            .yesscript > div.menu {
-                padding-top: 10vh;
-                padding-right: 20vw;
+            .settings-item:last-child {
+                margin-bottom: 0;
             }
 
-        }
+                .settings-label {
+                    font-weight: bold;
+                    display: inline-block;
+                    padding-right: 1rem;
+                }
 
-
-
-        .yesscript > div.footer {
-            width: 90vw;
-            margin: 5vh auto 0 auto;
-            padding: 10vh 15vw;
-            color: #666;
-            text-align: center;
-            font-size: 1.2rem;
-            border-top: 5px solid #f9f9f9;
-        }
+                .settings-outer button {
+                    font-size: 0.7em;
+                }
 
         @media screen and (min-width: 768px) {
 
-            .yesscript > div.footer {
-                width: 80vw;
-                font-size: 1rem;
+            .settings-outer {
+                padding: 6rem 30vw;
+                font-size: 1.2rem;
             }
 
         }
 
-        /*.yesscript > div.footer {
-            margin-top: 5vh;
-            padding: 10vh 15vw;
-            background: #f9f9f9;
+
+
+        .imagecontainer {
+            position: relative;
+            margin: 4rem auto 2rem auto;
+            cursor: pointer;
+            display: block;
+            width: 75vw;
+            min-height: 42vw;
+        }
+
+            .imagecontainer-intro {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 0.3rem 2rem;
+                background: rgba(0, 0, 0, 0.33);
+                color: white;
+                font-size: 0.9rem;
+            }
+
+            .imagecontainer-intro::selection {
+                color: inherit;
+                background: transparent;
+            }
+
+            .imagecontainer-intro::-moz-selection {
+                color: inherit;
+                background: transparent;
+            }
+
+        @media screen and (min-width: 768px) {
+
+            .imagecontainer {
+                width: 50vw;
+                min-height: 28vw;
+            }
+
+        }
+
+
+
+        .svg-text-contents-outer {
+            display: block;
+            width: 75vw;
+            margin: 0 auto 5rem auto;
+            background: #f3f3f3;
+            cursor: pointer;
+        }
+
+            .svg-text-contents-intro {
+                display: block;
+                width: 100%;
+                padding: 0.3rem 2rem;
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                font-size: 0.9rem;
+            }
+
+            .svg-text-contents-text {
+                display: block;
+                width: 100%;
+                height: 25vw;
+                padding: 2rem 2rem;
+                border: 0;
+                background: transparent;
+                outline: none;
+            }
+
+        @media screen and (min-width: 768px) {
+
+            .svg-text-contents-outer {
+                width: 50vw;
+            }
+
+                .svg-text-contents-text {
+                    height: 15vw;
+                }
+
+        }
+
+
+
+        .footer {
+            padding: 6rem 15vw;
+            background: #f3f3f3;
             color: #999;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
         }
 
         @media screen and (min-width: 768px) {
 
-            .yesscript > div.footer {
-                margin-top: 10vh;
-                font-size: 1rem;
-            }
-
-        }*/
-
-
-
-        .container {
-            position: relative;
-            margin: 0 auto;
-        }
-
-            .container .buttons {
-                position: absolute;
-                top: 5vw;
-                left: 5vw;
-                display: block;
-            }
-
-                .container.mode-dark .buttons button {
-                    background: #333;
-                    color: #eee;
-                    /*background: rgba(255, 255, 255, 0.95);
-                    color: black;*/
-                }
-
-                .container.mode-light .buttons button {
-                    background: #333;
-                    color: #eee;
-                }
-
-        #container-portrait {
-            width: 70vw;
-            min-height: 140vw;
-        }
-
-        @media screen and (min-width: 768px) {
-
-            .container .buttons {
-                top: 3vw;
-                left: 3vw;
-            }
-
-            #container-landscape {
-                display: block;
-                width: 66vw;
-                min-height: 37vw;
-            }
-
-            #container-portrait {
-                width: 33vw;
-                min-height: 59vw;
-            }
-
-        }
-
-        @media screen and (max-aspect-ratio: 1/1) {
-
-            #container-landscape-outer {
-                display: none;
-            }
-
-        }
-
-        @media screen and (min-aspect-ratio: 1/1) {
-
-            #container-portrait-outer {
-                display: none;
+            .footer {
+                padding: 6rem 30vw;
             }
 
         }
@@ -278,82 +278,86 @@
         To view this page you must enable Javascript.
     </noscript>
 
-    <div class="yesscript">
+    <div class="main">
 
-        <!-- <div class="intro">
-            On this page you can generate unlimited random background images
-            which you can then download for free by clicking &darr; buttons.
-        </div> -->
-
-        <div class="menu">
-            <button onclick="setMode('light')" id="menu-button-light">Light</button>
-            <button onclick="setMode('dark')" id="menu-button-dark">Dark</button>
+        <div class="hero">
+            On this page you can generate random background images in SVG format.
+            Unlimited. Free.
         </div>
 
-        <div id="container-landscape-outer">
-            <div class="container" id="container-landscape">
-                <div class="buttons">
-                    <button onclick="generateImage('landscape')">Generate</button>
-                    <button onclick="downloadImageSvg('landscape')">&darr;SVG</button>
-                    <!-- <button onclick="downloadImagePng('landscape')">&darr;PNG</button> -->
-                </div>
+        <div class="settings-outer">
+            <div class="settings-item">
+                <span class="settings-label">Tone:</span>
+                <button onclick="setSetting('tone', 'pastel')" id="settings-button-tone-pastel">Pastel</button>
+                <button onclick="setSetting('tone', 'medium')" id="settings-button-tone-medium">Medium</button>
+            </div>
+            <div class="settings-item">
+                <span class="settings-label">Color:</span>
+                <button onclick="setSetting('colorLock', true)" id="settings-button-colorLock-true">Lock</button>
+                <button onclick="setSetting('colorLock', false)" id="settings-button-colorLock-false">Random</button>
+            </div>
+            <div class="settings-item">
+                <span class="settings-label">Shapes:</span>
+                <button onclick="setSetting('shapes', 'circles')" id="settings-button-shapes-circles">Circle</button>
+                <button onclick="setSetting('shapes', 'rectangles')" id="settings-button-shapes-rectangles">Rect</button>
             </div>
         </div>
 
-        <div id="container-portrait-outer">
-            <div class="container" id="container-portrait">
-                <div class="buttons">
-                    <button onclick="generateImage('portrait')">Generate</button>
-                    <button onclick="downloadImageSvg('portrait')">&darr;SVG</button>
-                    <!-- <button onclick="downloadImagePng('portrait')">&darr;PNG</button> -->
-                </div>
+        <div class="imagecontainer" onclick="generateImage()">
+            <div class="imagecontainer-intro">
+                Click to generate new
             </div>
+        </div>
+
+        <div class="svg-text-contents-outer">
+            <div class="svg-text-contents-intro" onclick="downloadImageSvg()">
+                Image SVG Contents
+            </div>
+            <textarea type="text" class="svg-text-contents-text" onclick="this.select()"></textarea>
         </div>
 
         <div class="footer">
-            Hope you enjoyed it!
+            <a href="https://github.com/trigvi">CREATED BY TRIGVI</a>
         </div>
 
     </div>
 
     <script>
 
-        var mode = '';
-        var svgContentsLandscape = '';
-        var svgContentsPortrait = '';
+        var settings = {
+            tone: 'pastel', // pastel, medium
+            shapes: 'circles', // rectangles, circles
+            colorLock: false,
+            latestColor: null
+        };
+        var svgContents = '';
 
-        function setMode(value) {
+        function setSetting(name, value) {
 
-            // Set mode globally
-            mode = value;
+            settings[name] = value;
 
-            // Set mode css classes (first remove any existing mode- class)
-            var containers = document.querySelectorAll('.container');
-            for (var idx=0; idx<containers.length; idx++) {
-                var container = containers[idx];
-                container.classList.remove('mode-dark');
-                container.classList.remove('mode-light');
-                container.classList.add(`mode-${value}`);
-            }
+            // Determine settings button id we have to toggle
+            settingsButtonIdToToggle = 'settings-button-' + name + '-' + value.toString();
 
-            var menuButtons = document.querySelectorAll('.menu button');
-            for (var idx=0; idx<menuButtons.length; idx++) {
-                var menuButton = menuButtons[idx];
-                menuButton.classList.remove('toggled');
-                if (menuButton.id === 'menu-button-light' && mode === 'light') {
-                    menuButton.classList.add('toggled');
-                } else if (menuButton.id === 'menu-button-dark' && mode === 'dark') {
-                    menuButton.classList.add('toggled');
+            // Reset all button styles for this setting
+            var settingsButtons = document.querySelectorAll('.settings-outer button');
+            for (var idx=0; idx<settingsButtons.length; idx++) {
+                var settingsButton = settingsButtons[idx];
+                if (settingsButton.id.startsWith('settings-button-' + name)) {
+                    if (settingsButton.id === settingsButtonIdToToggle) {
+                        settingsButton.classList.add('toggled');
+                    } else {
+                        settingsButton.classList.remove('toggled');
+                    }
                 }
             }
 
-            // Auto-generate new images
-            generateImage('landscape');
-            generateImage('portrait');
+            // Generate new image
+            generateImage();
 
         }
 
-        function generateImage(orientation='landscape') {
+        function generateImage() {
 
             // Generate new image
             var svg = document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' );
@@ -362,10 +366,6 @@
 
             var svgWidth = 7680;
             var svgHeight = 4320;
-            if (orientation === 'portrait') {
-                var svgWidth = 4320;
-                var svgHeight = 7680;
-            }
             svg.setAttribute('viewBox', '0 0 ' + svgWidth.toString() + ' ' + svgHeight.toString());
             svg.setAttribute('width', svgWidth);
             svg.setAttribute('height', svgHeight);
@@ -374,34 +374,30 @@
                 singleShapeMaxDimension = svgWidth;
             }
 
+            var rgbColor = settings.latestColor;
+            if (settings.colorLock !== true) {
+                rgbColor = generateRandomRgbColorString();
+                settings.latestColor = rgbColor;
+            }
             var backgroundRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             backgroundRect.setAttribute('width', svgWidth);
             backgroundRect.setAttribute('height', svgHeight);
-            backgroundRect.setAttribute('style', 'fill: ' + generateRandomRgbColorString());
+            backgroundRect.setAttribute('style', 'fill: ' + rgbColor);
             svg.appendChild(backgroundRect);
-
-            // var shape = 'circle';
-            var shape;
-            var randomShapeDecider = Math.random() * 100;
-            if (randomShapeDecider < 50) {
-                shape = 'circle';
-            } else {
-                shape = 'rect';
-            }
 
             for (var idx=1; idx<=20; idx++) {
 
                 var fillColor = '';
                 var fillOpacity = 0;
-                if (mode === 'dark') {
+                if (settings.tone === 'medium') {
                     var fillColor = 'black';
                     var fillOpacity = 0.1 * Math.random();
-                } else if (mode === 'light') {
+                } else if (settings.tone === 'pastel') {
                     var fillColor = 'black';
                     var fillOpacity = 0.05 * Math.random();
                 }
 
-                if (shape === 'rect') {
+                if (settings.shapes === 'rectangles') {
                     var rectWidth = Math.random() * (singleShapeMaxDimension/1.5);
                     var rectHeight = Math.random()* rectWidth;
                     var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -412,7 +408,7 @@
                     rect.setAttribute('style', 'fill: ' + fillColor + '; opacity: ' + fillOpacity);
                     svg.appendChild(rect);
 
-                } else if (shape === 'circle') {
+                } else if (settings.shapes === 'circles') {
                     var circleWidth = Math.random() * (singleShapeMaxDimension/1.5);
                     var circleRadius = circleWidth / 2;
                     var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -424,19 +420,14 @@
                 }
             }
 
-            var svgContents = '';
-            if (orientation === 'landscape') {
-                svgContentsLandscape = svg.outerHTML;
-                svgContents = svgContentsLandscape;
-            } else if (orientation === 'portrait') {
-                svgContentsPortrait = svg.outerHTML;
-                svgContents = svgContentsPortrait;
-            }
+            svgContents = svg.outerHTML;
+            document.querySelectorAll('.svg-text-contents-text')[0].value = svgContents;
 
-            var container = document.getElementById(`container-${orientation}`);
+            var imagecontainer = document.querySelectorAll(`.imagecontainer`)[0];
             var svgAsUrl = 'data:image/svg+xml;utf8,' + svgContents;
-            container.style.background = "no-repeat black url('" + svgAsUrl + "')";
-            container.style.backgroundSize = "cover";
+            imagecontainer.style.background = "no-repeat black url('" + svgAsUrl + "')";
+            imagecontainer.style.backgroundSize = "cover";
+
         }
 
         function generateRandomString(length) {
@@ -451,14 +442,7 @@
 
         }
 
-        function downloadImageSvg(orientation='landscape') {
-
-            var svgContents = '';
-            if (orientation === 'landscape') {
-                svgContents = svgContentsLandscape;
-            } else if (orientation === 'portrait') {
-                svgContents = svgContentsPortrait;
-            }
+        function downloadImageSvg() {
 
             if (!svgContents) {
                 return;
@@ -475,78 +459,20 @@
 
         }
 
-        // // TODO: the following squishes the image
-        // function downloadImagePng(orientation) {
-
-        //     // https://takuti.me/note/javascript-save-svg-as-image/
-
-        //     // Read svg contents based on orientation
-        //     var svgContents = '';
-        //     if (orientation === 'landscape') {
-        //         svgContents = svgContentsLandscape;
-        //     } else if (orientation === 'portrait') {
-        //         svgContents = svgContentsPortrait;
-        //     }
-
-        //     // Create svg DOM element from string
-        //     var svgWrapper = document.createElement('div');
-        //     svgWrapper.innerHTML = svgContents;
-        //     document.body.appendChild(svgWrapper);
-        //     var svg = svgWrapper.firstChild;
-
-        //     // Convert svg to blob
-        //     var data = (new XMLSerializer()).serializeToString(svg);
-        //     var svgBlob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
-
-        //     // Convert blob to url
-        //     var url = URL.createObjectURL(svgBlob);
-
-        //     // Load blob to image object
-        //     var img = new Image();
-        //     img.addEventListener('load', () => {
-
-        //         // Draw image on canvas
-        //         var bbox = svg.getBBox();
-        //         var canvas = document.createElement('canvas');
-        //         canvas.width = bbox.width;
-        //         canvas.height = bbox.height;
-
-        //         var context = canvas.getContext('2d');
-        //         context.drawImage(img, 0, 0, bbox.width, bbox.height);
-        //         URL.revokeObjectURL(url);
-        //         svgWrapper.remove();
-
-        //         // Trigger download from temporary anchor which we then delete
-        //         var a = document.createElement('a');
-        //         a.download = generateRandomString(10) + '.png';
-        //         document.body.appendChild(a);
-        //         a.href = canvas.toDataURL();
-        //         a.click();
-        //         a.remove();
-        //     });
-        //     img.src = url;
-        // }
-
         function generateRandomRgbColorString() {
-
 
             // Generate random HSL color
             // https://stackoverflow.com/a/43195379
             var h, s, l;
-            if (mode === 'light') {
+            if (settings.tone === 'pastel') {
                 h = 360 * Math.random();
                 s = (20 + 70 * Math.random());
                 l = (85 + 10 * Math.random());
-            } else if (mode === 'dark') {
+            } else if (settings.tone === 'medium') {
                 h = 360 * Math.random();
                 s = (25 + 20 * Math.random());
                 l = 45;
             }
-            // } else if (mode === 'dark') {
-            //     h = 360 * Math.random();
-            //     s = (10 + 20 * Math.random());
-            //     l = 25;
-            // }
 
             // Convert to RGB then stringify for CSS
             var rgb = HSLToRGB(h, s, l);
@@ -609,9 +535,13 @@
 
         }
 
-        // Actual execution starts here
-        document.querySelectorAll('.yesscript')[0].style.display = 'block';
-        setMode('dark');
+        // Actual execution starts here.
+        // We show the "main" element which should only be visible if Javascript is enabled.
+        // We also trigger setSettings for each setting on itself basically, this toggles buttons.
+        document.querySelectorAll('.main')[0].style.display = 'block';
+        setSetting('tone', settings.tone);
+        setSetting('shapes', settings.shapes);
+        setSetting('colorLock', settings.colorLock);
 
     </script>
 
